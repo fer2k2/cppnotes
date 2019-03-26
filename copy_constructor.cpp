@@ -25,7 +25,7 @@ class IntArray {
     ...
 };
 
-// A better ide ais to implement our own copy constructor that performs Deep-copying
+// A better idea is to implement our own copy constructor that performs Deep-copying
 IntArray(const IntArray& source) {
   if (!source.IsEmpty()) {
     m_size = source.m_size;
