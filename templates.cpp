@@ -22,8 +22,7 @@ bool Equals(T lhs, U rhs)
 	return lhs == rhs;
 }
 
-
-// Class templates
+/** Class templates **/
 // TODO: Add parameter initialization on ctor
 template <typename T>
 class MyPair
@@ -37,7 +36,7 @@ public:
 	}
 }
 
-// Template specialization
+/** Template specialization **/
 // given the template 
 template <typename T>
 bool Equals(T lhs, T rhs)
@@ -54,7 +53,7 @@ bool Equals<float>(float lhs, float rhs)
 }
 
 
-// Tag dispatch
+/** Tag dispatch **/
 #include <type_traits>
 template <typename T>
 bool Equals(T lhs, T rhs)
@@ -67,7 +66,7 @@ bool Equals
 
 
 
-// SFINAE: Substitution failure is not an error
+/** SFINAE: Substitution failure is not an error **/
 
 // Option 1
 
