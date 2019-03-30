@@ -56,22 +56,51 @@ bool Equals<float>(float lhs, float rhs)
 /** Tag dispatch **/
 #include <type_traits>
 template <typename T>
-bool Equals(T lhs, T rhs)
+bool Equals(T lhs, T rhs) // general case
 {
-	return Equals(lhs, rhs, conditional<is_floating_point<T>::value, true_type, false_type>{});
+	return Equals(lhs, rhs, conditional_t<is_floating_point<T>::value, true_type, false_type>{});
 }
 
 template <typename T>
-bool Equals 
+bool Equals(T lhs, T rhs, true_type) // floating version
+{
+	// imprecission handling
+	return true;
+}
 
-
+template <typename T>
+bool Equals(T lhs, T rhs, false_type) // non-floating version
+{
+	return rhs == rhs;
+}
 
 /** SFINAE: Substitution failure is not an error **/
-
 // Option 1
+template <typename T>
+bool Equals(T lhs, T rhs, false_type, enable_if_t<!is_floating_point<T>::value>* = nullptr) // non-floating version
+{
+	return rhs == rhs;
+}
+
+template <typename T>
+bool Equals(T lhs, T rhs, false_type, enable_if_t<is_floating_point<T>::value>* = nullptr) // floating version
+{
+	// imprecission handling
+	return true;
+}
 
 // Option 2
+template <typename T>
+enable_if_t<!is_floating_point<T>::value, bool> Equals(T lhs, T rhs, false_type) // non-floating version
+{
+	return rhs == rhs;
+}
 
-// Option 3
+template <typename T>
+enable_if_t<is_floating_point<T>::value, bool> Equals(T lhs, T rhs, false_type) // floating version
+{
+	// imprecission handling
+	return true;
+}
 
-
+/** Type deduction **/
