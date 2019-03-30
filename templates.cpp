@@ -37,7 +37,7 @@ public:
 }
 
 /** Template specialization **/
-// given the template 
+// given the template
 template <typename T>
 bool Equals(T lhs, T rhs)
 {
@@ -102,5 +102,3 @@ enable_if_t<is_floating_point<T>::value, bool> Equals(T lhs, T rhs, false_type) 
 	// imprecission handling
 	return true;
 }
-
-/** Type deduction **/
