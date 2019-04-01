@@ -1,4 +1,4 @@
-// All about threads
+/** Threads **/
 
 // Thread header
 #include <thread>
@@ -19,7 +19,17 @@ int main()
   return 0;
 }
 
-// Detach a thread
 t1.detach(); // t1 runs freely becoming a deamon process
 
 t1.joinable(); // ask if a thread is joinable, so we can call join()
+
+this_thread::get_id(); // get the current thread ID
+
+this_thread::sleep_for(1s); // current thread sleeps for 1 sec
+
+lock_guard<mutex> locker(comonLock); // the lock guard secures all the statements until the end of the method
+
+// Condition variable
+
+// header
+#include <condition_variable>
